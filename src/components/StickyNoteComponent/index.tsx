@@ -64,6 +64,7 @@ function StickNoteComponent(props: any) {
                 Body
                 <TextAreaComponent text={props.text.body} handleChange={props.handleChangeBody} />
             </Body>
+            {props.children}
             <ButtonSegment>
             <Button isPrimary={true} onClick={() => props.taskSubmit(true)}>
                 ADD

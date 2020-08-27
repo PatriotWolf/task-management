@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import BoardContainer from 'src/containers/BoardContainer';
 import StickNoteComponent from 'src/components/StickyNoteComponent';
 
@@ -18,13 +19,34 @@ const Button = styled.button`
   padding:5px 10px;
   color:#fff;
 `;
-class HomeContainer extends Component<any, any>{
-  state = {
+
+interface Task {
+  [index: number]:{
+    head:string,
+    body:string,
+  }
+}
+
+interface State {
+  showModal?: boolean,
+  text: {
+    head:string,
+    body:string
+  },
+  date:Date,
+  task: Task[]
+}
+
+class HomeContainer extends Component<any, State>{
+  
+  state: Readonly<State> = {
     showModal: true,
     text: {
       head:"",
       body:""
-    }
+    },
+    date:new Date(),
+    task:[]
   }
 
   toggleModal = (condition: boolean) => {
@@ -32,12 +54,17 @@ class HomeContainer extends Component<any, any>{
   }
   
   taskSubmit = (isSubmitTask: boolean) => {
+    let { text, task, date } = this.state;
+    
     if(isSubmitTask){
-
+      if(text.head.length && text.body.length){
+        let newTask = [...task,{text:text, date}]
+        this.setState({ showModal: false, text:{head:"",body:""},task:newTask })
+      }
     } else{
-      
+      this.setState({ showModal: false, text:{head:"",body:""} })
     }
-    this.setState({ showModal: false })
+    
   }
 
   handleChangeTitle = (event: any) => {
@@ -48,20 +75,26 @@ class HomeContainer extends Component<any, any>{
     this.setState({ text: {...this.state.text, body:event.target.value} });
   }
 
-  render() {
-    const { showModal, text } = this.state;
-    return <Container>
+  setStartDate = (date:any) =>{
+    this.setState({date:date})
+  }
 
-      <BoardContainer />
+  render() {
+    const { showModal, text, date, task } = this.state;
+    return <Container>
+      <BoardContainer task={task} />
       <Button onClick={() => this.toggleModal(true)}>
         new task
-          </Button>
+      </Button>
       {showModal && <StickNoteComponent
         text={text}
+        date=""
         taskSubmit={this.taskSubmit}
         handleChangeTitle={this.handleChangeTitle}
         handleChangeBody={this.handleChangeBody}
-        />
+        >
+          <DatePicker selected={date} onChange={(date:any) => this.setStartDate(date)} />
+        </StickNoteComponent>
       }
     </Container>
   }

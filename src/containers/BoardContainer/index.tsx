@@ -10,14 +10,37 @@ const Container = styled.div`
     color:#fff;
     font-weight:bold;
     display:flex;
-    flex-direction:column;
-    justify-content:space-between;
+
 `;
 
-class BoardContainer extends Component<any,any>{
-    render(){
+const Paper = styled.div`
+    display:flex;
+    flex-direction:column;
+    background:#fff;
+    color:#000;
+    padding: 2em;
+    margin:1em;
+    height:20vh;
+`;
+
+class BoardContainer extends Component<any, any>{
+    dateString = (date: Date) => {
+        let dd = date.getDate();
+        let mm = date.getMonth() + 1;
+        let yyyy = date.getFullYear();
+        return mm+'/'+dd+'/'+yyyy;
+    }
+    render() {
+        let { task } = this.props
         return <Container>
-            </Container>
+            {
+                task.length > 0 && task.map((taskData: any, index: number) => <Paper key={"paper" + index}>
+                    <span>Title: {taskData.text.head}</span>
+                    <span>Desc:{taskData.text.head}</span>
+                    <span>Due: {this.dateString(taskData.date)}</span>
+                </Paper>)
+            }
+        </Container>
     }
 }
 
