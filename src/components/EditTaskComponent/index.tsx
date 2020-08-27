@@ -5,7 +5,7 @@ import InputComponent from "src/components/FormComponents/Input";
 import TextAreaComponent from '../FormComponents/TextAreaComponent';
 
 const Container = styled.div`
-    position:absolute;
+    color:#000;
     background: #fff;
     box-shadow:0 0 30px 5px #dadada;
     width:30em;
@@ -52,7 +52,7 @@ const ButtonSegment = styled.div`
 `;
 
 
-function StickNoteComponent(props: any) {
+function EditTaskComponent(props: any) {
     
     return (
         <Container>
@@ -64,13 +64,10 @@ function StickNoteComponent(props: any) {
                 Body
                 <TextAreaComponent text={props.text.body} handleChange={props.handleChangeBody} />
             </Body>
-            <Body>
             Due Date: {props.children}
-            </Body>
-            
             <ButtonSegment>
             <Button isPrimary={true} onClick={() => props.taskSubmit(true)}>
-                { props.isTaskUpdate ? "Update":"Add"}
+                Update
             </Button>
             <Button isPrimary={false} onClick={() => props.taskSubmit(false)}>
                 Close
@@ -80,4 +77,4 @@ function StickNoteComponent(props: any) {
     );
 }
 
-export default StickNoteComponent;
+export default EditTaskComponent;
