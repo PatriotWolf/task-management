@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from 'src/assets/logo.svg';
-import './App.css';
+import styled from 'styled-components';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import HomeContainer from "src/containers/Home";
+
+const Container = styled.div`
+  background:linear-gradient(90deg, rgba(18,52,59,1) 0%, rgba(45,84,94,1) 10%, rgba(45,84,94,1) 90%,rgba(18,52,59,1) 100%);
+  witdh:100%;
+  height:100vh;
+  font-size:20px;
+`;
+
+const Star = styled.div`
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: ${() => starGenerate(3000)};
+`;
+
+const starGenerate = (total: number) => {
+  let value = `${Math.floor((Math.random() * 2000) + 1)}px ${Math.floor((Math.random() * 4000) + 1)}px #FFF,`;
+  for (let i = 0; i < total; i++) {
+    value = value + `${Math.floor((Math.random() * 4000) + 1)}px ${Math.floor((Math.random() * 4000) + 1)}px #FFF ${(i !== (total - 1)) ? "," : ""}`
+  }
+  return value
+}
+
+function App (){
+    return (
+      <Container>
+        <Star />
+        <HomeContainer/>
+      </Container>
+    );
 }
 
 export default App;
