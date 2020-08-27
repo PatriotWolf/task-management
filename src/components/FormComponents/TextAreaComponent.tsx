@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Input = styled.textarea`
     display: block;
-    width: 80%;
+    width: 100%;
     box-sizing:border-box;
     padding: .375rem .75rem;
     resize: none;
@@ -20,6 +20,7 @@ const Input = styled.textarea`
 
 function TextAreaComponent (props:any) {
     return  <Input
+    rows={5}
     placeholder="Hover to focus!"
     value={props.text}
     onChange={props.handleChange}

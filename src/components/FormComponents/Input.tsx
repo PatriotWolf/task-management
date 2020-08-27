@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Input = styled.input`
     display: block;
-    width: 80%;
+    width: 100%;
     box-sizing:border-box;
     padding: .375rem .75rem;
     font-size: 1rem;

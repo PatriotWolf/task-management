@@ -21,13 +21,13 @@ export function generateTaskArr():Task[]{
         });
         let newObj = {
             text:{
-                head:"title",
+                head:"Title No."+(i+1),
                 body:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
             },
             date:new Date(),
             uuid
         }
-        taskArray.push(newObj)
+        taskArray.unshift(newObj)
     }
     
 

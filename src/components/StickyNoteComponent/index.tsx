@@ -10,8 +10,10 @@ const Container = styled.div`
     box-shadow:0 0 30px 5px #dadada;
     width:30em;
     height: 40vh;
+    border: 2px solid #c7c7c7;
     border-radius:5px;
     font-weight:bold;
+    padding:0 2em;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
@@ -19,19 +21,20 @@ const Container = styled.div`
 
 const Head = styled.div`
     display:flex;
-    align-items:center;
+    
+    flex-direction:column;
     justify-content:space-around;
-    padding: 2em 0;
-    text-align: center;
+    padding: 1em 0;
+    
     flex-grow:1;
 `;
 
 const Body = styled.div`
     display:flex;
-    justify-content:space-around;
-    padding: 2em 0em;
+    flex-direction:column;
+    padding: 0em 0em;
     color:#000;
-    flex-grow:8;
+    flex-grow:10;
 `;
 
 

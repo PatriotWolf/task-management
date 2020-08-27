@@ -14,7 +14,7 @@ const Star = styled.div`
   width: 1px;
   height: 1px;
   background: transparent;
-  box-shadow: ${() => starGenerate(3000)};
+  box-shadow: ${() => starGenerate(14000)};
 `;
 
 const starGenerate = (total: number) => {

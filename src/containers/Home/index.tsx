@@ -113,11 +113,15 @@ class HomeContainer extends Component<any, State>{
   generateTask = () =>{
     this.setState({task:generateTaskArr()})
   }
+  onDeleteTask = (uuid:string) =>{
+  const newArray = this.state.task.filter(obj => obj.uuid!=uuid);
+  this.setState({task:newArray})
 
+  }
   render() {
     const { showModal, text, date, task, isTaskUpdate } = this.state;
     return <Container>
-      <BoardContainer task={task} onHandleEditTask={this.onHandleEditTask} />
+      <BoardContainer task={task} onHandleEditTask={this.onHandleEditTask} onDeleteTask={this.onDeleteTask}/>
       <Button onClick={() => this.toggleModal(true)}>
         new task
       </Button>
