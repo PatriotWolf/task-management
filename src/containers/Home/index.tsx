@@ -14,23 +14,40 @@ const Container = styled.div`
   align-items:center;
   height:99vh;
 `;
+
+const ButtonSegment = styled.div`
+  display:flex;
+  width:80%;
+  justify-content: space-between;
+  margin-bottom:10px;
+  font-weight:bold;
+  font-size:2.5em;
+  color:#fff;
+`;
+
 const Button = styled.button`
   background:none;
   border-color:#fff;
   border-radius:5px;
   padding:5px 10px;
+  font-weight:bold;
+  font-size:0.8em;
   color:#fff;
+  &:hover {
+    cursor:pointer;
+    box-shadow:0px 0px 10px #fff;
+  }
 `;
 
 interface Task {
-  
-    text:{
-      head: string,
-      body: string,
-    },
-    date:Date,
-    uuid:string
-  
+
+  text: {
+    head: string,
+    body: string,
+  },
+  date: Date,
+  uuid: string
+
 }
 
 interface State {
@@ -39,7 +56,7 @@ interface State {
     head: string,
     body: string
   },
-  currTaskId:string|null,
+  currTaskId: string | null,
   isTaskUpdate: boolean,
   date: Date,
   task: Task[]
@@ -48,12 +65,12 @@ interface State {
 class HomeContainer extends Component<any, State>{
 
   state: Readonly<State> = {
-    showModal: true,
+    showModal: false,
     text: {
       head: "",
       body: ""
     },
-    currTaskId:null,
+    currTaskId: null,
     date: new Date(),
     isTaskUpdate: false,
     task: []
@@ -68,18 +85,18 @@ class HomeContainer extends Component<any, State>{
 
     if (isSubmitTask) {
       if (text.head.length && text.body.length) {
-        if(!isTaskUpdate){
-          let newTask = [{ text: text, date, uuid: create_UUID() },...task ]
+        if (!isTaskUpdate) {
+          let newTask = [{ text: text, date, uuid: create_UUID() }, ...task]
           this.setState({ showModal: false, text: { head: "", body: "" }, task: newTask })
         } else {
           console.log(currTaskId)
-          let foundIndex = task.findIndex((o:any) => o.uuid === currTaskId)
-          task[foundIndex] = { text:text , date, uuid: create_UUID() };
+          let foundIndex = task.findIndex((o: any) => o.uuid === currTaskId)
+          task[foundIndex] = { text: text, date, uuid: create_UUID() };
           console.log(task)
-          this.setState({ showModal: false, isTaskUpdate:false, text: { head: "", body: "" }, task: task })
+          this.setState({ showModal: false, isTaskUpdate: false, text: { head: "", body: "" }, task: task })
 
         }
-        
+
       }
     } else {
       this.setState({ showModal: false, text: { head: "", body: "" } })
@@ -103,31 +120,35 @@ class HomeContainer extends Component<any, State>{
     console.log(task)
     this.setState({
       showModal: true,
-      isTaskUpdate:true,
+      isTaskUpdate: true,
       text: task.text,
       currTaskId: task.uuid,
       date: task.date,
     })
   }
 
-  generateTask = () =>{
-    this.setState({task:generateTaskArr()})
+  generateTask = () => {
+    this.setState({ task: generateTaskArr() })
   }
-  onDeleteTask = (uuid:string) =>{
-  const newArray = this.state.task.filter(obj => obj.uuid!=uuid);
-  this.setState({task:newArray})
+  onDeleteTask = (uuid: string) => {
+    const newArray = this.state.task.filter(obj => obj.uuid != uuid);
+    this.setState({ task: newArray })
 
   }
   render() {
     const { showModal, text, date, task, isTaskUpdate } = this.state;
     return <Container>
-      <BoardContainer task={task} onHandleEditTask={this.onHandleEditTask} onDeleteTask={this.onDeleteTask}/>
-      <Button onClick={() => this.toggleModal(true)}>
-        new task
+      <ButtonSegment>
+        <Button onClick={() => this.toggleModal(true)}>
+          New Task
       </Button>
+      My Task
       <Button onClick={() => this.generateTask()}>
-        generate stack
+          Generate Stack
       </Button>
+      </ButtonSegment>
+      <BoardContainer task={task} onHandleEditTask={this.onHandleEditTask} onDeleteTask={this.onDeleteTask} />
+
       {showModal && <StickNoteComponent
         text={text}
         date=""

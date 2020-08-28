@@ -8,6 +8,13 @@ const Container = styled.div`
   witdh:100%;
   height:100vh;
   font-size:20px;
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border:1px solid black;
+    ...
+ }
 `;
 
 const Star = styled.div`

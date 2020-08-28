@@ -10,10 +10,10 @@ const Container = styled.div`
     box-shadow:0 0 30px 5px #dadada;
     width:30em;
     height: 40vh;
-    border: 2px solid #c7c7c7;
+    border: 4px solid #cacaca;
     border-radius:5px;
     font-weight:bold;
-    padding:0 2em;
+    padding:1em 2em 2em 2em;
     display:flex;
     flex-direction:column;
     justify-content:space-between;

@@ -12,7 +12,7 @@ interface Task {
 
 export function generateTaskArr():Task[]{
     let taskArray = [];
-    for( let i=0; i<20;i++){
+    for( let i=0; i<40;i++){
         var dt = new Date().getTime();
         var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
             var r = (dt + Math.random()*16)%16 | 0;

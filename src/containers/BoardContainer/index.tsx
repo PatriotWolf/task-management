@@ -17,6 +17,7 @@ const Container = styled.div`
     height: 60vh;
     border-radius:5px;
     color:#fff;
+    
 `;
 
 const Paper = styled.div`
@@ -31,11 +32,42 @@ const Paper = styled.div`
     height:20vh;
 `;
 
+const PaperContent = styled.div`
+    display: flex;
+    flex-direction:column;
+`;
+
+const PaperTitle = styled.span`
+    font-weight:bold;
+    display:contents;
+`;
+
 const Content = styled.div`
-    display:flex;
-    flex-direction:row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
     overflow-y: auto;
+    width:85%;
+    height:100%;
+    ::-webkit-scrollbar {
+        width: 5px;
+      }
+      
+      /* Track */
+      ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey; 
+        border-radius: 10px;
+      }
+       
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #fff; 
+        border-radius: 10px;
+      }
+      
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #b30000; 
+      }
 `;
 
 const Delete = styled.span`
@@ -92,11 +124,11 @@ class BoardContainer extends Component<any, any>{
                     
                 >   
                     <Delete onClick={()=>this.props.onDeleteTask(taskData.uuid)}>x</Delete>
-                    <Content>
-                        <span>Title: {taskData.text.head}</span>
-                        <span>Desc:{taskData.text.body}</span>
-                        <span>Due: {this.dateString(taskData.date)}</span>
-                    </Content>
+                    <PaperContent>
+                        <PaperTitle>Title:</PaperTitle> {taskData.text.head} <br/>
+                        <PaperTitle>Desc:</PaperTitle><br/>{taskData.text.body} <br/>
+                        <PaperTitle>Due:</PaperTitle> {this.dateString(taskData.date)}
+                    </PaperContent>
                     <EditButton onClick={()=>this.props.onHandleEditTask(taskData)}>Edit</EditButton>
                 </Paper>)
             }
